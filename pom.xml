@@ -19,4 +19,14 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <!-- 统一管理依赖的版本号 -->
+    <properties>
+        <!-- lombok 版本  -->
+        <lombok.version>1.18.12</lombok.version>
+        <!-- 糊涂工具包 -->
+        <hutool.version>5.8.5</hutool.version>
+        <!-- jwt 加、解密 -->
+        <jwt.version>3.19.2</jwt.version>
+    </properties>
+
 </project>

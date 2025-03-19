@@ -1,4 +1,4 @@
-package cn.hl.user.util;
+package cn.hl.common.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

@@ -27,6 +27,12 @@
         <hutool.version>5.8.5</hutool.version>
         <!-- jwt 加、解密 -->
         <jwt.version>3.19.2</jwt.version>
+        <!-- mybatis-plus-boot-starter 版本 -->
+        <mybatis.plus.version>3.5.1</mybatis.plus.version>
+        <!-- 阿里巴巴的druid数据库连接池  -->
+        <druid.starter.version>1.2.11</druid.starter.version>
+        <!-- 数据库 MySQL 连接 -->
+        <mysql.connector.version>8.0.16</mysql.connector.version>
     </properties>
 
 </project>

@@ -16,12 +16,18 @@ public class CallResult<T> implements Serializable {
     private String message;
     private T data;
 
+    public CallResult(int code, String message, T data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
+
     public static <T> CallResult success(T data) {
-        CallResult<T> callResult = new CallResult();
-        callResult.code = SUCCESS_CODE;
-        callResult.message = SUCCESS_MSG;
-        callResult.data = data;
-        return callResult;
+        return new CallResult(SUCCESS_CODE, SUCCESS_MSG, data);
+    }
+
+    public static CallResult error(int code, String message) {
+        return new CallResult(code, message, "");
     }
 
 }

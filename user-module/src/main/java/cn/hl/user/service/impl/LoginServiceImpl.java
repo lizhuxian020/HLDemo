@@ -1,5 +1,7 @@
 package cn.hl.user.service.impl;
 
+import cn.hl.common.model.exception.HLReturnCode;
+import cn.hl.common.model.exception.HLRunTimeException;
 import cn.hl.user.dao.UserLoginDao;
 import cn.hl.user.model.dto.UserLoginDTO;
 import cn.hl.user.model.dto.UserRegisterDTO;
@@ -29,11 +31,13 @@ public class LoginServiceImpl extends ServiceImpl<UserLoginDao, UserAccountEntit
     }
 
     @Override
-    public boolean registerAccount(UserRegisterDTO userRegisterDTO) {
+    public boolean registerAccount(UserRegisterDTO userRegisterDTO){
         //检查该账号是否存在
-        // TODO: 报错
-//        LambdaQueryWrapper wrapper = new LambdaQueryWrapper().eq(UserRegisterDTO::getAccount, userRegisterDTO.getAccount());
-//        this.baseMapper.selectOne()
+        LambdaQueryWrapper<UserAccountEntity> wrapper = new LambdaQueryWrapper<UserAccountEntity>().eq(UserAccountEntity::getAccount, userRegisterDTO.getAccount());
+        UserAccountEntity userAccountEntity = this.baseMapper.selectOne(wrapper);
+        if (userAccountEntity != null) {
+            throw new HLRunTimeException(HLReturnCode.USER_LOGIN_REGISTER_DUPLICATION_ERROR);
+        }
         UserAccountEntity userEntity = new UserAccountEntity();
         userEntity.setAccount(userRegisterDTO.getAccount());
         userEntity.setPassword(userRegisterDTO.getPassword());

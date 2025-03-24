@@ -5,7 +5,9 @@ import lombok.Getter;
 @Getter
 public enum HLReturnCode {
 
-    USER_LOGIN_REGISTER_DUPLICATION_ERROR(401, "账号已存在"),
+    BASE_TOKEN_UNAUTHORIZED(401, "未授权"),
+    USER_LOGIN_REGISTER_DUPLICATION(402, "账号已存在"),
+
 
     ;
 

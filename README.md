@@ -4,15 +4,17 @@
 
 ##待解决问题:
 1. 统一收集错误, 统一处理返回 3-12
-   1. 关键类: ExceptionControllerAdvice 3-20
-   2. 注解RestControllerAdvice, ExceptionHandler
-   3. 见解: 原理, 使用AOP思想, 对各个Controller(target)的方法(pointCut)进行增强(Advice)
-      1. 在这些方法执行的时候, 如果抛出异常了, 正好是被ExceptionHandler指定的, 就到Advice这里处理
+   1. 3-20
+      1. 关键类: ExceptionControllerAdvice 
+      2. 注解RestControllerAdvice, ExceptionHandler
+      3. 见解: 原理, 使用AOP思想, 对各个Controller(target)的方法(pointCut)进行增强(Advice)
+         1. 在这些方法执行的时候, 如果抛出异常了, 正好是被ExceptionHandler指定的, 就到Advice这里处理
 2. User模块, 访问不到接口??  3-12
     1. ApplicationLauncher不能单独放一个文件夹里, 要放到最外层, 不然扫描不到 3.17
 3. 如何使用注解给Controller入参做前置判断
 4. 如何抛出异常 3-19
    1. 如果抛的是RuntimeException, 则在方法名上不用声明异常抛出 3-20
+5. 如何抓取不是自定义以外的异常, 比如找不到路径404 3-24
 
 ##进度:
 1. 创建demo, 生成base, main, user模块, 3-12
@@ -41,3 +43,9 @@
 ###3-20
 1. 新建自己的异常类型, 并实现全局捕获
 2. 成功处理账号重复异常, 返回异常处理后的结果 (没处理, 则是架构自己处理的格式.)
+
+##3-24
+1. 新建building模块, 准备实现接受token
+2. 实现WebMvcConfigSupport, 实现参数解析器
+3. 如何实现: login不需要token, 其他需要
+4. 

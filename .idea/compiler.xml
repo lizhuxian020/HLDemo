@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="base-module" />
+        <module name="building-module" />
         <module name="application-main" />
         <module name="user-module" />
       </profile>
@@ -20,6 +21,7 @@
       <module name="HLBaseModule" options="-parameters" />
       <module name="application-main" options="-parameters" />
       <module name="base-module" options="-parameters" />
+      <module name="building-module" options="-parameters" />
       <module name="user-module" options="-parameters" />
     </option>
   </component>

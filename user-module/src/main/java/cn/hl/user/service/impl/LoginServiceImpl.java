@@ -36,7 +36,7 @@ public class LoginServiceImpl extends ServiceImpl<UserLoginDao, UserAccountEntit
         LambdaQueryWrapper<UserAccountEntity> wrapper = new LambdaQueryWrapper<UserAccountEntity>().eq(UserAccountEntity::getAccount, userRegisterDTO.getAccount());
         UserAccountEntity userAccountEntity = this.baseMapper.selectOne(wrapper);
         if (userAccountEntity != null) {
-            throw new HLRunTimeException(HLReturnCode.USER_LOGIN_REGISTER_DUPLICATION_ERROR);
+            throw new HLRunTimeException(HLReturnCode.USER_LOGIN_REGISTER_DUPLICATION);
         }
         UserAccountEntity userEntity = new UserAccountEntity();
         userEntity.setAccount(userRegisterDTO.getAccount());

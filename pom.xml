@@ -7,6 +7,7 @@
         <module>base-module</module>
         <module>application-main</module>
         <module>user-module</module>
+        <module>building-module</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -33,6 +34,8 @@
         <druid.starter.version>1.2.11</druid.starter.version>
         <!-- 数据库 MySQL 连接 -->
         <mysql.connector.version>8.0.16</mysql.connector.version>
+        <!-- 阿里巴巴 fastjson -->
+        <fastjson.version>2.0.12</fastjson.version>
     </properties>
 
 </project>

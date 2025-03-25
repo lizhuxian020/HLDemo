@@ -11,7 +11,7 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 19/03/2025 18:29:06
+ Date: 25/03/2025 23:47:54
 */
 
 SET NAMES utf8mb4;
@@ -25,6 +25,7 @@ CREATE TABLE `user_account` (
   `user_id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',
   `account` varchar(15) NOT NULL COMMENT '手机号码（登录时作为username使用）',
   `password` varchar(64) NOT NULL COMMENT '用户密码（sha256加密）',
+  `real_name` varchar(50) DEFAULT '',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 
@@ -32,7 +33,7 @@ CREATE TABLE `user_account` (
 -- Records of user_account
 -- ----------------------------
 BEGIN;
-INSERT INTO `user_account` (`user_id`, `account`, `password`) VALUES (1, '123', 'asdasd');
+INSERT INTO `user_account` (`user_id`, `account`, `password`, `real_name`) VALUES (1, '123', 'asdasd', 'test');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

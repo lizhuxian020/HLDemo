@@ -1,5 +1,6 @@
 package cn.hl.user.model.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -7,7 +8,9 @@ import lombok.Data;
 @TableName("user_account")
 public class UserAccountEntity {
 
+    @TableId(value = "user_id")
+    private Integer userId;
     private String account;
     private String password;
-
+    private String realName;
 }

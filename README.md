@@ -15,6 +15,7 @@
 4. 如何抛出异常 3-19
    1. 如果抛的是RuntimeException, 则在方法名上不用声明异常抛出 3-20
 5. 如何抓取不是自定义以外的异常, 比如找不到路径404 3-24
+6. 如何实现: login不需要token, 其他需要 3-24
 
 ##进度:
 1. 创建demo, 生成base, main, user模块, 3-12
@@ -48,4 +49,8 @@
 1. 新建building模块, 准备实现接受token
 2. 实现WebMvcConfigSupport, 实现参数解析器
 3. 如何实现: login不需要token, 其他需要
-4. 
+
+##3-25
+1. 基本完成jwt方案选择, 使用jjwt库, 来完成对jwt的使用
+   1. jjwt可以设置过期时间, 不需要依赖redis
+2. 基本完成jwtConfig

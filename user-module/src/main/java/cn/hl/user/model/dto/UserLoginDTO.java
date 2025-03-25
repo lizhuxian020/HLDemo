@@ -7,4 +7,5 @@ public class UserLoginDTO {
 
     private String account;
     private String password;
+    private String realName;
 }

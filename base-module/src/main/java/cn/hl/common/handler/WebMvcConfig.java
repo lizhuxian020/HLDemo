@@ -5,8 +5,8 @@ import cn.hl.common.constant.SystemConstant;
 import cn.hl.common.model.exception.HLReturnCode;
 import cn.hl.common.model.exception.HLRunTimeException;
 import cn.hl.common.model.jwt.TokenMessage;
-import cn.hutool.jwt.Claims;
 import com.alibaba.fastjson2.JSON;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
@@ -48,8 +48,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                         throw new HLRunTimeException(HLReturnCode.BASE_TOKEN_UNAUTHORIZED);
                     }
                     Claims claimsByToken = jwtConfig.getClaimsByToken(token);
-                    //TODO: 通过token, 解析成对象, 返回给接口入参
-//                    JSON.parseObject(claimsByToken.getClaimsJson().toJSONString(), TokenMessage.class);
+                    TokenMessage tokenMessage = JSON.parseObject(claimsByToken.getSubject(), TokenMessage.class);
+                    return tokenMessage;
                 }
                 return UNRESOLVED;
             }

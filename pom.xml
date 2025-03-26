@@ -40,6 +40,8 @@
         <jjwt.version>0.9.0</jjwt.version>
         <!--        通用工具类-->
         <commons-lang3>3.7</commons-lang3>
+        <!--        shiro-->
+        <shiro.version>1.4.0</shiro.version>
     </properties>
 
 </project>

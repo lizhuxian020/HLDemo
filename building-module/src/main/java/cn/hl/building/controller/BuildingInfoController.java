@@ -14,4 +14,9 @@ public class BuildingInfoController {
         return JSON.toJSONString(tokenMessage);
 //        return String.valueOf(buildingId);
     }
+
+    @GetMapping("/asd")
+    public String test() {
+        return "asd";
+    }
 }

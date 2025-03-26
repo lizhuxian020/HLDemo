@@ -8,7 +8,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Data;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.util.Base64;
 import java.util.Date;

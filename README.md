@@ -64,4 +64,4 @@
 
 ##3-26
 1. 创建楼栋,房间的表
-2. 了解shiro如何使用, 以解决接口是否需要校验token问题
+2. 了解shiro如何使用, 以解决接口是否需要校验token问题//https://blog.csdn.net/UnicornRe/article/details/124872159

@@ -40,7 +40,7 @@
         <jjwt.version>0.9.0</jjwt.version>
         <!--        通用工具类-->
         <commons-lang3>3.7</commons-lang3>
-        <!--        shiro-->
+        <!--        shiro三件套: core, web, spring, 用于token的校验或者登录,身份校验-->
         <shiro.version>1.4.0</shiro.version>
     </properties>
 

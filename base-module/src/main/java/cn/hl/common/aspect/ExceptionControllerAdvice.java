@@ -2,8 +2,11 @@ package cn.hl.common.aspect;
 
 import cn.hl.common.model.CallResult;
 import cn.hl.common.model.exception.HLRunTimeException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
@@ -12,4 +15,11 @@ public class ExceptionControllerAdvice {
     public CallResult processRuntimeException(HLRunTimeException exception) {
         return CallResult.error(exception.getCode(), exception.getMessage());
     }
+
+    @ExceptionHandler(Exception.class)
+    public CallResult handleOtherException(Exception e, HttpServletResponse response) {
+        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        return CallResult.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "歇一歇, 再试试");
+    }
+
 }

@@ -65,3 +65,7 @@
 ##3-26
 1. 创建楼栋,房间的表
 2. 了解shiro如何使用, 以解决接口是否需要校验token问题//https://blog.csdn.net/UnicornRe/article/details/124872159
+
+##3-27
+1. 完善shiro的机制, 同时了解运行逻辑, shiro三大件: config(核心配置类), filter(前置过滤逻辑,是否允许继续走登录逻辑), realm(登录逻辑处理, 主要实现身份认证和授权逻辑)
+2. 遇到问题: 还是没能抓住所有Exception, 为什么旧项目就可以抓住. 比如token解析失败. 旧项目不会直接返回系统错误. 

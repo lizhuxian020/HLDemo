@@ -1,6 +1,7 @@
 lzx:
   mysql:
-    ip: 192.168.186.128
+#    ip: 192.168.186.128
+    ip: 192.168.4.132
 
 spring:
   datasource:

@@ -24,6 +24,9 @@ public class OAuthRealm extends AuthorizingRealm {
     @Autowired
     private JwtConfig jwtConfig;
 
+    /*
+    * 表示该realm支持哪种token的解析
+    * */
     @Override
     public boolean supports(AuthenticationToken token) {
         if (token instanceof OAuthToken) {
@@ -42,20 +45,26 @@ public class OAuthRealm extends AuthorizingRealm {
     }
 
     /*
-    * 身份校验
+    * 身份校验, 从filter那边过来的逻辑
+    * 执行身份校验, 那到token, 直接执行我们自己的校验逻辑. 通过则返回info对象
+    * 否则直接抛异常, 在filter那会执行loginFailure
     * */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         OAuthToken oAuthToken = (OAuthToken) authenticationToken;
-        String tokenPrincipal = (String) oAuthToken.getPrincipal();
+        String tokenCredentials = (String) oAuthToken.getCredentials();
         try {
-            Claims claimsByToken = jwtConfig.getClaimsByToken(tokenPrincipal);
+            Claims claimsByToken = jwtConfig.getClaimsByToken(tokenCredentials);
             String tokenJsonString = claimsByToken.getSubject();
             TokenMessage tokenMessage = JSON.parseObject(tokenJsonString, TokenMessage.class);
-            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(tokenMessage, tokenPrincipal, getName());
+            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(tokenMessage, tokenCredentials, getName());
             return simpleAuthenticationInfo;
-        } catch (ExpiredJwtException expiredJwtException) {
-//            e.printStackTrace();
+        } catch (ExpiredJwtException e) {
+            e.printStackTrace();
+            //过期了
+            throw new HLRunTimeException(HLReturnCode.BASE_TOKEN_UNAUTHORIZED);
+        } catch (Exception e) {
+            e.printStackTrace();
             throw new HLRunTimeException(HLReturnCode.BASE_TOKEN_UNAUTHORIZED);
         }
     }

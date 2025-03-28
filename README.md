@@ -68,4 +68,13 @@
 
 ##3-27
 1. 完善shiro的机制, 同时了解运行逻辑, shiro三大件: config(核心配置类), filter(前置过滤逻辑,是否允许继续走登录逻辑), realm(登录逻辑处理, 主要实现身份认证和授权逻辑)
-2. 遇到问题: 还是没能抓住所有Exception, 为什么旧项目就可以抓住. 比如token解析失败. 旧项目不会直接返回系统错误. 
+2. 遇到问题: 还是没能抓住所有Exception, 为什么旧项目就可以抓住. 比如token解析失败. 旧项目不会直接返回系统错误.
+   1. 3-28
+      1. shiro逻辑上所有的Exception. SpringWeb的ExceptionHandler是捕获不到的
+      2. 所以要自己处理, 在校验token的时候发生的异常, 捕获出来, 自己处理, 并在loginFailure里篡改response
+      3. 旧项目也抓不了, 只要你不处理loginFailure, 他就是返回空, 不会把异常报出去
+      4. 刚开始为什么本项目会提示系统错误, 是因为在accessDenied的时候, 没执行executeLogin, 而是直接拿到subject执行login, 导致异常没捕获到. 直接抛给web服务器(瞎说, 反正没给shiro捕获到)了. 
+
+##3-28
+1. 终于算是熟悉完基本shiro的登录校验流程, 通过注释方式写在对应打码上面
+2. 基本实现除login以外所有接口, 校验token逻辑.

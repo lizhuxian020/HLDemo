@@ -1,5 +1,6 @@
 package cn.hl.common.model;
 
+import cn.hl.common.model.exception.HLReturnCode;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -28,6 +29,10 @@ public class CallResult<T> implements Serializable {
 
     public static CallResult error(int code, String message) {
         return new CallResult(code, message, "");
+    }
+
+    public static CallResult returnCode(HLReturnCode returnCode) {
+        return new CallResult(returnCode.getCode(), returnCode.getMessage(), "");
     }
 
 }

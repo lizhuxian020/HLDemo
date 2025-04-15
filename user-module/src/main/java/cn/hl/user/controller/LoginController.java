@@ -3,10 +3,13 @@ package cn.hl.user.controller;
 import cn.hl.common.model.CallResult;
 import cn.hl.user.model.dto.UserLoginDTO;
 import cn.hl.user.model.dto.UserRegisterDTO;
+import cn.hl.user.model.vo.UserInfoVO;
 import cn.hl.user.model.vo.UserLoginVO;
 import cn.hl.user.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -26,5 +29,11 @@ public class LoginController {
     @RequestMapping("/register")
     public CallResult<Boolean> register(@RequestBody UserRegisterDTO userRegisterDTO) {
         return CallResult.success(loginService.registerAccount(userRegisterDTO));
+    }
+
+    @GetMapping
+    @RequestMapping("/list")
+    public CallResult<List<UserInfoVO>> getPages() {
+        return CallResult.success(loginService.listOfUserInfo());
     }
 }

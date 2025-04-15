@@ -8,8 +8,10 @@ import cn.hl.user.dao.UserLoginDao;
 import cn.hl.user.model.dto.UserLoginDTO;
 import cn.hl.user.model.dto.UserRegisterDTO;
 import cn.hl.user.model.entity.UserAccountEntity;
+import cn.hl.user.model.vo.UserInfoVO;
 import cn.hl.user.model.vo.UserLoginVO;
 import cn.hl.user.service.LoginService;
+import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -18,11 +20,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class LoginServiceImpl extends ServiceImpl<UserLoginDao, UserAccountEntity> implements LoginService {
 
-    @Autowired
+    @Resource
     private JwtConfig jwtConfig; //TOResolv: 为啥Autowire会报错
 
     @Override
@@ -58,6 +62,18 @@ public class LoginServiceImpl extends ServiceImpl<UserLoginDao, UserAccountEntit
         userEntity.setPassword(userRegisterDTO.getPassword());
         boolean save = this.save(userEntity);
         return save;
+    }
+
+    @Override
+    public List<UserInfoVO> listOfUserInfo() {
+        List<UserAccountEntity> userAccountEntities = this.baseMapper.selectList(new LambdaQueryWrapper<UserAccountEntity>());
+        List<UserInfoVO> list = new ArrayList<>();
+        for (UserAccountEntity entity : userAccountEntities) {
+            UserInfoVO infoVO = new UserInfoVO();
+            BeanUtil.copyProperties(entity, infoVO);
+            list.add(infoVO);
+        }
+        return list;
     }
 
 

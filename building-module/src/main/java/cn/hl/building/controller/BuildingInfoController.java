@@ -15,8 +15,4 @@ public class BuildingInfoController {
 //        return String.valueOf(buildingId);
     }
 
-    @GetMapping("/asd")
-    public String test() {
-        return "asd";
-    }
 }

@@ -76,19 +76,19 @@ public class OAuthFilter extends AuthenticatingFilter {
     * 这里抛异常好像没屌用, exceptionAdvice捕获不了这里的异常.
     * 只能通过篡改response来返回
     * */
-//    @Override
-//    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response) {
-//        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-//        httpServletResponse.setContentType("application/json;charset=utf-8");
-//        try {
-//            CallResult result = CallResult.returnCode(HLReturnCode.BASE_TOKEN_UNAUTHORIZED);
-//            String json = JSON.toJSONString(result);
-//            response.getWriter().print(json);
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//        return false;
-//    }
+    @Override
+    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response) {
+        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+        httpServletResponse.setContentType("application/json;charset=utf-8");
+        try {
+            CallResult result = CallResult.returnCode(HLReturnCode.BASE_TOKEN_UNAUTHORIZED);
+            String json = JSON.toJSONString(result);
+            response.getWriter().print(json);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 
     /*
     * shiro框架所属的token对象, authenticationToken, 也就是身份校验的token

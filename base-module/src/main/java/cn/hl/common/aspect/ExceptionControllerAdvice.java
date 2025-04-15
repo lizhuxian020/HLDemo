@@ -18,6 +18,7 @@ public class ExceptionControllerAdvice {
 
     @ExceptionHandler(Exception.class)
     public CallResult handleOtherException(Exception e, HttpServletResponse response) {
+        e.printStackTrace();
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return CallResult.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "歇一歇, 再试试");
     }

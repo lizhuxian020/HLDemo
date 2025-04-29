@@ -9,7 +9,7 @@ import lombok.Data;
 public class UserAccountEntity {
 
     @TableId(value = "user_id")
-    private Integer userId;
+    private int userId;
     private String account;
     private String password;
     private String realName;

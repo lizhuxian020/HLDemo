@@ -1,6 +1,7 @@
 package cn.hl.user.service.impl;
 
 import cn.hl.common.config.JwtConfig;
+import cn.hl.common.model.dto.PageDTO;
 import cn.hl.common.model.exception.HLReturnCode;
 import cn.hl.common.model.exception.HLRunTimeException;
 import cn.hl.common.model.jwt.TokenMessage;
@@ -14,6 +15,8 @@ import cn.hl.user.service.LoginService;
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -56,22 +59,48 @@ public class LoginServiceImpl extends ServiceImpl<UserAccountDao, UserAccountEnt
             throw new HLRunTimeException(HLReturnCode.USER_LOGIN_REGISTER_DUPLICATION);
         }
         UserAccountEntity userEntity = new UserAccountEntity();
-        userEntity.setAccount(userRegisterDTO.getAccount());
-        userEntity.setPassword(userRegisterDTO.getPassword());
-        boolean save = this.save(userEntity);
-        return save;
+        BeanUtil.copyProperties(userRegisterDTO, userEntity);
+        this.baseMapper.insert(userEntity);
+        return true;
     }
 
     @Override
-    public List<UserInfoVO> listOfUserInfo() {
-        List<UserAccountEntity> userAccountEntities = this.baseMapper.selectList(new LambdaQueryWrapper<UserAccountEntity>());
+    public boolean userUpdate(UserRegisterDTO userRegisterDTO) {
+        if (userRegisterDTO.getUserId() == null) {
+            throw new HLRunTimeException(HLReturnCode.BASE_ILLEGAL_PARAM);
+        }
+        UserAccountEntity entity = this.baseMapper.selectOne(new LambdaQueryWrapper<UserAccountEntity>().eq(UserAccountEntity::getUserId, userRegisterDTO.getUserId()));
+        if (entity == null) {
+            throw new HLRunTimeException(HLReturnCode.USER_CAN_NOT_FIND_USER);
+        }
+        BeanUtil.copyProperties(userRegisterDTO, entity);
+        this.baseMapper.updateById(entity);
+        return true;
+    }
+
+    @Override
+    public IPage<UserInfoVO> listOfUserInfo(PageDTO pageDTO) {
+        Page<UserAccountEntity> page = new Page<>(pageDTO.getCurrent(), pageDTO.getSize());
+        Page<UserAccountEntity> userAccountEntityPage = this.baseMapper.selectPage(page, new LambdaQueryWrapper<UserAccountEntity>());
+        Page<UserInfoVO> userInfoVOPage = new Page<>(page.getCurrent(), page.getSize());
         List<UserInfoVO> list = new ArrayList<>();
-        for (UserAccountEntity entity : userAccountEntities) {
+        for (UserAccountEntity entity : userAccountEntityPage.getRecords()) {
             UserInfoVO infoVO = new UserInfoVO();
             BeanUtil.copyProperties(entity, infoVO);
             list.add(infoVO);
         }
-        return list;
+        userInfoVOPage.setRecords(list);
+        userInfoVOPage.setTotal(page.getTotal());
+        userInfoVOPage.setPages(page.getPages());
+        return userInfoVOPage;
+    }
+
+    @Override
+    public UserInfoVO userWithId(Integer id) {
+        UserAccountEntity entity = this.baseMapper.selectOne(new LambdaQueryWrapper<UserAccountEntity>().eq(UserAccountEntity::getUserId, id));
+        UserInfoVO vo = new UserInfoVO();
+        BeanUtil.copyProperties(entity, vo);
+        return vo;
     }
 
 

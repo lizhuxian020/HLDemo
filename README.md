@@ -82,3 +82,6 @@
 
 ##4-15
 1. 新增接口: /user/list, 输出用户信息列表, 以调试h5页面
+
+##4-29
+1. 基本完成buildingController和UserController的编写和联调(增删改查)

@@ -1,10 +1,9 @@
 package cn.hl.building.model.dto;
 
+import cn.hl.common.model.dto.PageDTO;
 import lombok.Data;
 
 @Data
-public class BuildingInfoPageDTO {
+public class BuildingInfoPageDTO extends PageDTO {
 
-    private int current;
-    private int size;
 }

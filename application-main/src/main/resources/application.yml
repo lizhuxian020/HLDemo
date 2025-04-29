@@ -10,3 +10,10 @@ spring:
     url: jdbc:mysql://${lzx.mysql.ip}:3306/hl_demo?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
     username: root
     password: qq123123
+#    打开mybatis日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+jwt:
+  tokenExpire: 86400

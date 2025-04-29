@@ -4,6 +4,8 @@ import cn.hl.common.model.exception.HLReturnCode;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 public class CallResult<T> implements Serializable {
@@ -25,6 +27,12 @@ public class CallResult<T> implements Serializable {
 
     public static <T> CallResult success(T data) {
         return new CallResult(SUCCESS_CODE, SUCCESS_MSG, data);
+    }
+
+    public static CallResult successBool(Boolean data) {
+        Map<String, Object> resultData = new HashMap<>();
+        resultData.put("flag", data);
+        return new CallResult(SUCCESS_CODE, SUCCESS_MSG, resultData);
     }
 
     public static CallResult error(int code, String message) {

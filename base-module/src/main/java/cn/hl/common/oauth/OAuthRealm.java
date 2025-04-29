@@ -51,6 +51,7 @@ public class OAuthRealm extends AuthorizingRealm {
     * */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+
         OAuthToken oAuthToken = (OAuthToken) authenticationToken;
         String tokenCredentials = (String) oAuthToken.getCredentials();
         try {

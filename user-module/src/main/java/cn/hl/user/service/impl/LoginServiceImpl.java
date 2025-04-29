@@ -4,7 +4,7 @@ import cn.hl.common.config.JwtConfig;
 import cn.hl.common.model.exception.HLReturnCode;
 import cn.hl.common.model.exception.HLRunTimeException;
 import cn.hl.common.model.jwt.TokenMessage;
-import cn.hl.user.dao.UserLoginDao;
+import cn.hl.user.dao.UserAccountDao;
 import cn.hl.user.model.dto.UserLoginDTO;
 import cn.hl.user.model.dto.UserRegisterDTO;
 import cn.hl.user.model.entity.UserAccountEntity;
@@ -15,8 +15,6 @@ import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class LoginServiceImpl extends ServiceImpl<UserLoginDao, UserAccountEntity> implements LoginService {
+public class LoginServiceImpl extends ServiceImpl<UserAccountDao, UserAccountEntity> implements LoginService {
 
     @Resource
     private JwtConfig jwtConfig; //TOResolv: 为啥Autowire会报错

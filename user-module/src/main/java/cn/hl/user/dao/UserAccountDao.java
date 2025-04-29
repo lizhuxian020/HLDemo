@@ -5,5 +5,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface UserLoginDao extends BaseMapper<UserAccountEntity> {
+public interface UserAccountDao extends BaseMapper<UserAccountEntity> {
 }
